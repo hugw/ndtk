@@ -1,0 +1,36 @@
+{
+  "name": "ndtk",
+  "version": "0.0.0",
+  "description": "Node Toolkit - Utility Functions.",
+  "author": "Hugo W. <contact@hugw.io>",
+  "main": "./lib/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "babel ./src --ignore '__test__' -s -D -d lib",
+    "clean": "rimraf lib",
+    "dev": "nodemon -w ./src --inspect --exec \"babel-node ./src\"",
+    "lint": "eslint ./src",
+    "prepublishOnly": "npm run lint && npm run test && npm run clean && npm run build",
+    "test": "jest ./src --verbose --colors --detectOpenHandles  --forceExit",
+    "test:watch": "npm run test -- --watch"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-config-node": "git+https://github.com/hugw/eslint-config-node.git",
+    "eslint-import-resolver-babel-module": "^4.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "jest": "^23.3.0",
+    "nodemon": "^1.17.5",
+    "rimraf": "^2.6.2"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
