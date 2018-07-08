@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Node Toolkit - Utility Functions.",
   "author": "Hugo W. <contact@hugw.io>",
-  "main": "./lib/index.js",
+  "main": "./lib/index",
   "license": "MIT",
   "scripts": {
     "build": "babel ./src --ignore '__test__' -s -D -d lib",
