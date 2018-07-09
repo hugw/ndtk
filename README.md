@@ -47,6 +47,23 @@ assert(a === b) // Throws an Error with a default message 'Something went wrong.
 assert(a === b, new Error('Oops')) // Throws the same Error with message 'Oops'
 ```
 
+### `ccd()`
+
+Return the current caller directory.
+
+```js
+
+// src/lib/lib.js
+export const lib = (path) => {
+  const callerDir = path || ccd()
+  console.log(callerDir)
+}
+
+// src/app.js
+import lib from '../lib/lib'
+
+lib() // Log /abs/path/to/src"
+lib(__dirname) // Log /abs/path/to/src"
 ***
 
 The MIT License (MIT)

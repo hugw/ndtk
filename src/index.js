@@ -6,6 +6,8 @@
  * @license MIT
  */
 
+import path from 'path'
+
 /**
  * Environment
  * utility functions
@@ -38,4 +40,22 @@ export const assert = (condition, content) => {
   }
 
   throw new Error('Something went wrong.')
+}
+
+/**
+ * Current caller directory
+ * @link https://github.com/stefanpenner/get-caller-file/blob/master/index.js
+ */
+export const ccd = () => {
+  const oldPrepareStackTrace = Error.prepareStackTrace
+  Error.prepareStackTrace = (err, stack) => stack
+
+  const { stack } = new Error()
+  Error.prepareStackTrace = oldPrepareStackTrace
+
+  // stack[0] holds this file
+  // stack[1] holds where this function was called
+  // stack[2] holds the file we're interested in
+  const line = stack[2]
+  return !!line && path.dirname(line.getFileName())
 }
