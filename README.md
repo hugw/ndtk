@@ -1,5 +1,7 @@
 # Node Toolkit - Utility Functions
 
+[![CircleCI](https://circleci.com/gh/hugw/ndtk/tree/master.svg?style=svg&circle-token=a8823c9c34374fe0321d0e958f000db70f4f6119)](https://circleci.com/gh/hugw/ndtk/tree/master)
+
 ## Install
 
 ```
