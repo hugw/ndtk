@@ -32,6 +32,19 @@ Return `true` if current environment is set to "production".
 
 Return `true` if current environment is set to "qa".
 
+#### `assert(condition, [content])`
+
+- `content`: String or Error object to be thrown when a condition is not met.
+
+```js
+const a = 1
+const b = 2
+
+assert(a === b, 'a and b are not equal.') // Throws an Error with message 'a and b are not equal.'
+assert(a === b) // Throws an Error with a default message 'Something went wrong.'
+assert(a === b, new Error('Oops')) // Throws the same Error with message 'Oops'
+```
+
 ***
 
 The MIT License (MIT)
