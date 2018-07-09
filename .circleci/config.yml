@@ -1,0 +1,15 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.11.3
+
+    environment:
+      - NODE_ENV: test
+
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run lint
+      - run: npm run test
