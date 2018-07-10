@@ -85,6 +85,23 @@ req('./lib', false) // Return the object { default: 'Bar', a: 'Foo' }
 req('./libb') // Returns null
 ```
 
+### `supported(version)`
+
+Verify if the current Node running is supported.
+
+- `version`: String or Number accepted. E.g. "8" / 8 / "0.1" / 0.1 / "10.0.12"
+
+```js
+// Node version running => 8.11
+
+supported(8.11) // Return true
+supported("8.11") // Return true
+supported(7) // Return true
+supported("7.0") // Return true
+supported(9.1) // Return false
+supported("9.20") // Return false
+```
+
 ***
 
 The MIT License (MIT)

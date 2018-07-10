@@ -73,3 +73,19 @@ export const req = (name, defaultOnly = true) => {
     return null
   }
 }
+
+/**
+ * Verify if the current Node running
+ * is supported
+ */
+export const supported = (version) => {
+  // Numbers or strings are accepted
+  const isNumber = Number.parseFloat(version)
+  if (!isNumber) return false
+
+  const [supMajor, supMinor] = version.toString().split('.').map(parseFloat)
+  const [major, minor] = process.versions.node.split('.').map(parseFloat)
+
+  if (major < supMajor) return false
+  return supMinor ? minor >= supMinor : true
+}
