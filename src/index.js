@@ -59,3 +59,17 @@ export const ccd = () => {
   const line = stack[2]
   return !!line && path.dirname(line.getFileName())
 }
+
+/**
+ * Require optional modules without
+ * throwing unwanted errors
+ */
+export const req = (name, defaultOnly = true) => {
+  try {
+    const dir = path.resolve(ccd(), name)
+    const module = require(dir) // eslint-disable-line global-require, import/no-dynamic-require
+    return defaultOnly ? module.default : module
+  } catch (err) {
+    return null
+  }
+}

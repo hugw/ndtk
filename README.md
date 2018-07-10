@@ -34,8 +34,9 @@ Return `true` if current environment is set to "production".
 
 Return `true` if current environment is set to "qa".
 
-#### `assert(condition, [content])`
+### `assert(condition, [content])`
 
+- `condition`: The condition to be tested.
 - `content`: String or Error object to be thrown when a condition is not met.
 
 ```js
@@ -52,7 +53,6 @@ assert(a === b, new Error('Oops')) // Throws the same Error with message 'Oops'
 Return the current caller directory.
 
 ```js
-
 // src/lib/lib.js
 export const lib = (path) => {
   const callerDir = path || ccd()
@@ -64,6 +64,27 @@ import lib from '../lib/lib'
 
 lib() // Log /abs/path/to/src"
 lib(__dirname) // Log /abs/path/to/src"
+```
+
+### `req(name, [defaultOnly])`
+
+Require optional modules without throwing unwanted errors. Intended to work only for local files.
+
+- `name`: String representing the path to the module you wanna try to require.
+- `defaultOnly`: Defaults to `true`. Boolean to define if you wish to return only the `default` property or the whole module including named properties.
+
+```js
+// src/lib.js
+export const a = 'Foo'
+export default 'Bar'
+
+// src/app.js
+
+req('./lib') // Return 'Bar'
+req('./lib', false) // Return the object { default: 'Bar', a: 'Foo' }
+req('./libb') // Returns null
+```
+
 ***
 
 The MIT License (MIT)
