@@ -15,6 +15,9 @@
     "test": "jest ./src --verbose --colors --detectOpenHandles  --forceExit",
     "test:watch": "npm run test -- --watch"
   },
+  "dependencies": {
+    "lodash": "^4.17.10"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-module-resolver": "^3.1.1",
@@ -26,7 +29,6 @@
     "eslint-import-resolver-babel-module": "^4.0.0",
     "eslint-plugin-import": "^2.13.0",
     "jest": "^23.3.0",
-    "lodash": "^4.17.10",
     "nodemon": "^1.17.5",
     "rimraf": "^2.6.2"
   },
