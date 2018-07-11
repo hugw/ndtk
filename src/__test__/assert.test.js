@@ -1,6 +1,6 @@
 import { assert } from '@'
 
-describe('NDTK / Assert', () => {
+describe('NDTK / assert', () => {
   it('given truthy conditions, it should not throw any errors', () => {
     expect(assert(true)).toBeUndefined()
   })

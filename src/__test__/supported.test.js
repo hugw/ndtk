@@ -1,6 +1,6 @@
 import { supported } from '@'
 
-describe('NDTK / Supported', () => {
+describe('NDTK / supported', () => {
   it('should return FALSE for invalid version', () => {
     expect(supported()).toBeFalsy()
     expect(supported(null)).toBeFalsy()

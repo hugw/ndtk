@@ -12,29 +12,31 @@ $ npm install ndtk
 
 ##### `ENV`
 
-Return the value assigned to `process.env.NODE_ENV` when defined, otherwise returns "development".
+Returns the value assigned to `process.env.NODE_ENV` when defined, otherwise "development".
 
 #### `IS_DEV`
 
-Return `true` if current environment is set to "development".
+Returns `true` if current environment is set to "development".
 
 #### `IS_STAG`
 
-Return `true` if current environment is set to "staging".
+Returns `true` if current environment is set to "staging".
 
 #### `IS_TEST`
 
-Return `true` if current environment is set to "test".
+Returns `true` if current environment is set to "test".
 
 #### `IS_PROD`
 
-Return `true` if current environment is set to "production".
+Returns `true` if current environment is set to "production".
 
 #### `IS_QA`
 
-Return `true` if current environment is set to "qa".
+Returns `true` if current environment is set to "qa".
 
 ### `assert(condition, [content])`
+
+Executes simple assertions and throw errors in negative cases.
 
 - `condition`: The condition to be tested.
 - `content`: String or Error object to be thrown when a condition is not met.
@@ -50,28 +52,28 @@ assert(a === b, new Error('Oops')) // Throws the same Error with message 'Oops'
 
 ### `ccd()`
 
-Return the current caller directory.
+Returns the current caller directory.
 
 ```js
 // src/lib/lib.js
 export const lib = (path) => {
   const callerDir = path || ccd()
-  console.log(callerDir)
+  return callerDir
 }
 
 // src/app.js
 import lib from '../lib/lib'
 
-lib() // Log /abs/path/to/src"
-lib(__dirname) // Log /abs/path/to/src"
+lib() // Returns /abs/path/to/src"
+lib(__dirname) // Returns /abs/path/to/src"
 ```
 
 ### `req(name, [defaultOnly])`
 
 Require optional modules without throwing unwanted errors. Intended to work only for local files.
 
-- `name`: String representing the path to the module you wanna try to require.
-- `defaultOnly`: Defaults to `true`. Boolean to define if you wish to return only the `default` property or the whole module including named properties.
+- `name`: String representing the path to the module you are trying to require.
+- `defaultOnly`: Boolean. Defaults to `true`. Defines if you wish to return only the `default` property or the whole module including named properties.
 
 ```js
 // src/lib.js
@@ -80,26 +82,38 @@ export default 'Bar'
 
 // src/app.js
 
-req('./lib') // Return 'Bar'
-req('./lib', false) // Return the object { default: 'Bar', a: 'Foo' }
+req('./lib') // Returns 'Bar'
+req('./lib', false) // Returns the object { default: 'Bar', a: 'Foo' }
 req('./libb') // Returns null
 ```
 
 ### `supported(version)`
 
-Verify if the current Node running is supported.
+Verifies if the current Node running is supported. Returns a `boolean`.
 
-- `version`: String or Number accepted. E.g. "8" / 8 / "0.1" / 0.1 / "10.0.12"
+- `version`: String or Number.
 
 ```js
 // Node version running => 8.11
 
 supported(8.11) // Return true
-supported("8.11") // Return true
+supported('8.11') // Return true
 supported(7) // Return true
-supported("7.0") // Return true
+supported('7.0') // Return true
 supported(9.1) // Return false
-supported("9.20") // Return false
+supported('9.20') // Return false
+```
+
+### `isDir(dir)`
+
+Verifies if current path is a valid directory without throwing unwanted exceptions. Returns a `boolean`.
+
+- `dir`: String representing the path of the tested directory.
+
+```js
+isDir(__dirname) // Return true
+isDir('../') // Return true
+isDir('bad-path') // Return false
 ```
 
 ***

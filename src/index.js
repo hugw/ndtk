@@ -7,6 +7,7 @@
  */
 
 import path from 'path'
+import fs from 'fs'
 
 /**
  * Environment
@@ -27,7 +28,7 @@ export const IS_PROD = ENV === PROD
 export const IS_QA = ENV === QA
 
 /**
- * Execute simple assertions and
+ * Executes simple assertions and
  * throw errors in negative cases
  */
 export const assert = (condition, content) => {
@@ -62,7 +63,7 @@ export const ccd = () => {
 
 /**
  * Require optional modules without
- * throwing unwanted errors
+ * throwing unwanted exceptions
  */
 export const req = (name, defaultOnly = true) => {
   try {
@@ -75,7 +76,7 @@ export const req = (name, defaultOnly = true) => {
 }
 
 /**
- * Verify if the current Node running
+ * Verifies if the current Node running
  * is supported
  */
 export const supported = (version) => {
@@ -88,4 +89,16 @@ export const supported = (version) => {
 
   if (major < supMajor) return false
   return supMinor ? minor >= supMinor : true
+}
+
+/**
+ * Verifies if current path
+ * is a valid directory without
+ * throwing unwanted exceptions
+ */
+export const isDir = (dir) => {
+  try {
+    const stats = fs.statSync(dir)
+    return stats.isDirectory()
+  } catch (e) { return false }
 }
