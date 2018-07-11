@@ -1,6 +1,6 @@
 import { isDir } from '@'
 
-describe('NDTK / isDir', () => {
+describe('#isDir', () => {
   it('should return TRUE for a valid path', () => {
     expect(isDir('../')).toBeTruthy()
     expect(isDir(__dirname)).toBeTruthy()

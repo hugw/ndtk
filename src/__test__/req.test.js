@@ -1,6 +1,6 @@
 import { req } from '@'
 
-describe('NDTK / req (Optional require)', () => {
+describe('#req (Optional require)', () => {
   it('should return the default property from the module if found', () => {
     const module = req('./fixtures/req')
     expect(module).toEqual('You have found me')

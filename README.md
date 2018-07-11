@@ -116,6 +116,68 @@ isDir('../') // Return true
 isDir('bad-path') // Return false
 ```
 
+### `config(object, defaults)`
+
+Generates configuration objects based on the current environment.
+
+- `object`: Raw object to be merged.
+- `defaults`: Fallback object.
+
+```js
+const object = {
+  base: {
+    foo: true,
+    bar: { enabled: true },
+  },
+  development: {
+    bar: { enabled: false, name: 'dev' },
+  },
+  test: {
+    foo: false,
+    testOnly: true,
+    bar: { name: 'test' },
+  },
+}
+
+const defaults {
+  base: {
+    required: [],
+  },
+  test: {
+    bar: { description: 'test description' },
+  }
+}
+
+// On "development" environment
+config(object)
+
+// Returns:
+// {
+//   foo: true,
+//   bar: { enabled: false, name: 'dev' }
+// }
+
+// On "test" environment
+config(object)
+
+// Returns:
+// {
+//   foo: false,
+//   testOnly: true,
+//   bar: { enabled: true, name: 'test' }
+// }
+
+config(object, defaults)
+
+// Returns:
+// {
+//   foo: false,
+//   required: [],
+//   testOnly: true,
+//   bar: { enabled: true, name: 'test', description: 'test description' }
+// }
+```
+
 ***
 
 The MIT License (MIT)

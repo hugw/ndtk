@@ -8,6 +8,7 @@
 
 import path from 'path'
 import fs from 'fs'
+import merge from 'lodash/merge'
 
 /**
  * Environment
@@ -102,3 +103,15 @@ export const isDir = (dir) => {
     return stats.isDirectory()
   } catch (e) { return false }
 }
+
+/**
+ * Generates configuration objects based
+ * on the current environment
+ */
+export const config = (object, defaults) => merge(
+  {},
+  defaults && defaults.base,
+  defaults && defaults[ENV],
+  object && object.base,
+  object && object[ENV],
+)

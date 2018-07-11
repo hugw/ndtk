@@ -7,7 +7,7 @@ import {
   IS_QA,
 } from '@'
 
-describe('NDTK / Environment utility functions', () => {
+describe('Environment utility functions', () => {
   it('#ENV should return "test"', () => {
     expect(ENV).toBe('test')
   })
