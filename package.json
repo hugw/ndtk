@@ -1,6 +1,6 @@
 {
   "name": "ndtk",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Node Toolkit - Utility Functions.",
   "author": "Hugo W. <contact@hugw.io>",
   "main": "./lib/index",
