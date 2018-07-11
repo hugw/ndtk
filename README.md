@@ -116,12 +116,12 @@ isDir('../') // Return true
 isDir('bad-path') // Return false
 ```
 
-### `config(object, defaults)`
+### `config(object, [defaults])`
 
 Generates configuration objects based on the current environment.
 
 - `object`: Raw object to be merged.
-- `defaults`: Fallback object.
+- `defaults`: Optional fallback object.
 
 ```js
 const object = {
