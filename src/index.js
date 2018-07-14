@@ -111,7 +111,7 @@ export const isDir = (dir) => {
 export const config = (object, defaults) => merge(
   {},
   defaults && defaults.base,
-  defaults && defaults[ENV],
   object && object.base,
+  defaults && defaults[ENV],
   object && object[ENV],
 )
