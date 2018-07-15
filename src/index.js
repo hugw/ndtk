@@ -9,6 +9,9 @@
 import path from 'path'
 import fs from 'fs'
 import merge from 'lodash/merge'
+import snakeCase from 'lodash/snakeCase'
+import toUpper from 'lodash/toUpper'
+import statuses from 'statuses'
 
 /**
  * Environment
@@ -121,6 +124,34 @@ export const config = (object, defaults) => merge(
   object && object[ENV],
 )
 
+/**
+ * HTTP-friendly error objects
+ */
+export const httpError = (code, meta = {}) => {
+  const defaults = merge({
+    message: undefined,
+    type: undefined,
+    attributes: undefined,
+  }, meta)
+
+  const status = statuses[code] ? code : 500
+  const message = defaults.message || statuses[status]
+  const type = defaults.type || toUpper(snakeCase(statuses[status]))
+  const { attributes } = meta
+
+  const error = new Error(message)
+
+  error.isHttp = true
+  error.output = {
+    status,
+    message,
+    type,
+    ...attributes ? { attributes } : {},
+  }
+
+  return error
+}
+
 export default {
   assert,
   ccd,
@@ -129,4 +160,5 @@ export default {
   isDir,
   config,
   merge,
+  httpError,
 }

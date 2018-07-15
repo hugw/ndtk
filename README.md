@@ -104,6 +104,68 @@ supported(9.1) // Return false
 supported('9.20') // Return false
 ```
 
+### `httpError(code, [meta])`
+
+Returns HTTP-friendly Error objects.
+
+- `code`: String or number representing the status code. Invalid or not found error codes will fallback to `500`.
+- `meta`: Object with extra information regarding the error. Possible options are `message`, `type` and `attributes`.
+
+```js
+httpError()
+
+// Returns:
+// Error Object {
+//   stack...,
+//   isHttp: true,
+//   message: 'Internal Server Error'
+//   output: {
+//     message: 'Internal Server Error',
+//     type: 'INTERNAL_SERVER_ERROR',
+//     status: 500,
+//   }
+// }
+
+httpError(400)
+
+// Returns:
+// Error Object {
+//   stack...,
+//   isHttp: true,
+//   message: 'Bad Request'
+//   output: {
+//     message: 'Bad Request',
+//     type: 'BAD_REQUEST',
+//     status: 400,
+//   }
+// }
+
+httpError(422, {
+  message: 'Something is wrong with this validation',
+  type: 'VALIDATION',
+  attributes: {
+    email: 'Email is invalid',
+    name: 'Name is required'
+  },
+})
+
+// Returns:
+// Error Object {
+//   stack...,
+//   isHttp: true,
+//   message: 'Something is wrong with this validation'
+//   output: {
+//     message: 'Something is wrong with this validation',
+//     type: 'VALIDATION',
+//     attributes: {
+//       email: 'Email is invalid',
+//       name: 'Name is required'
+//     },
+//     status: 422,
+//   }
+// }
+```
+
 ### `isDir(dir)`
 
 Verifies if current path is a valid directory without throwing unwanted exceptions. Returns a `boolean`.
