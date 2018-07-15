@@ -12,7 +12,7 @@ describe('#config', () => {
 
   it('given an invalid env object and with valid defaults, it should generate and return the formatted config object', () => {
     const defaults = {
-      base: {
+      default: {
         foo: 'foo',
         bar: 'bar',
       },
@@ -37,7 +37,7 @@ describe('#config', () => {
 
   it('given a valid env object and with invalid defaults, it should generate and return the formatted config object', () => {
     const object = {
-      base: {
+      default: {
         foo: 'foo',
         bar: 'bar',
       },
@@ -62,7 +62,7 @@ describe('#config', () => {
 
   it('given a valid env object, it should generate and return the formatted config object', () => {
     const object = {
-      base: {
+      default: {
         foo: true,
         bar: true,
       },
@@ -81,7 +81,7 @@ describe('#config', () => {
 
   it('given a valid env object and with valid defaults, it should generate and return the formatted config object', () => {
     const defaults = {
-      base: {
+      default: {
         foo: true,
         bar: true,
       },
@@ -92,7 +92,7 @@ describe('#config', () => {
     }
 
     const object = {
-      base: {
+      default: {
         foo: {},
         objectOnly: {
           enabled: true,
@@ -107,7 +107,7 @@ describe('#config', () => {
     }
 
     expect(config(object, defaults)).toEqual({
-      foo: {},
+      foo: false,
       bar: true,
       testOnly: 'test only',
       objectOnly: {

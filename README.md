@@ -125,7 +125,7 @@ Generates configuration objects based on the current environment.
 
 ```js
 const object = {
-  base: {
+  default: {
     foo: true,
     bar: { enabled: true },
   },
@@ -140,7 +140,7 @@ const object = {
 }
 
 const defaults {
-  base: {
+  default: {
     required: [],
   },
   test: {
