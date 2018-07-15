@@ -149,6 +149,9 @@ export const httpError = (code, meta = {}) => {
     ...attributes ? { attributes } : {},
   }
 
+  // Omits all frames above "httpError" from the generated stack trace
+  Error.captureStackTrace(error, httpError)
+
   return error
 }
 
