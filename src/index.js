@@ -34,14 +34,19 @@ export const IS_QA = ENV === QA
  */
 export const assert = (condition, content) => {
   if (condition) return
+  let error
 
   if (content instanceof Error) {
-    throw content
+    error = content
   } else if (typeof content === 'string') {
-    throw new Error(content)
+    error = new Error(content)
+  } else {
+    error = new Error('Something went wrong.')
   }
 
-  throw new Error('Something went wrong.')
+  // Omits all frames above "assert" from the generated stack trace
+  Error.captureStackTrace(error, assert)
+  throw error
 }
 
 /**
