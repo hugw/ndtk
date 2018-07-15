@@ -120,3 +120,13 @@ export const config = (object, defaults) => merge(
   defaults && defaults[ENV],
   object && object[ENV],
 )
+
+export default {
+  assert,
+  ccd,
+  req,
+  supported,
+  isDir,
+  config,
+  merge,
+}
