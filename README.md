@@ -87,23 +87,6 @@ req('./lib', false) // Returns the object { default: 'Bar', a: 'Foo' }
 req('./libb') // Returns null
 ```
 
-### `supported(version)`
-
-Verifies if the current Node running is supported. Returns a `boolean`.
-
-- `version`: String or Number.
-
-```js
-// Node version running => 8.11
-
-supported(8.11) // Return true
-supported('8.11') // Return true
-supported(7) // Return true
-supported('7.0') // Return true
-supported(9.1) // Return false
-supported('9.20') // Return false
-```
-
 ### `httpError(code, [meta])`
 
 Returns HTTP-friendly Error objects.

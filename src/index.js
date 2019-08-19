@@ -85,22 +85,6 @@ export const req = (name, defaultOnly = true) => {
 }
 
 /**
- * Verifies if the current Node running
- * is supported
- */
-export const supported = (version) => {
-  // Numbers or strings are accepted
-  const isNumber = Number.parseFloat(version)
-  if (!isNumber) return false
-
-  const [supMajor, supMinor] = version.toString().split('.').map(parseFloat)
-  const [major, minor] = process.versions.node.split('.').map(parseFloat)
-
-  if (major < supMajor) return false
-  return supMinor ? minor >= supMinor : true
-}
-
-/**
  * Verifies if current path
  * is a valid directory without
  * throwing unwanted exceptions
@@ -128,16 +112,11 @@ export const config = (object, defaults) => merge(
  * HTTP-friendly error objects
  */
 export const httpError = (code, meta = {}) => {
-  const defaults = merge({
-    message: undefined,
-    type: undefined,
-    attributes: undefined,
-  }, meta)
+  const { message: customMessage, type: customType, ...rest } = meta
 
   const status = statuses[code] ? code : 500
-  const message = defaults.message || statuses[status]
-  const type = defaults.type || toUpper(snakeCase(statuses[status]))
-  const { attributes } = meta
+  const message = customMessage || statuses[status]
+  const type = customType || toUpper(snakeCase(statuses[status]))
 
   const error = new Error(message)
 
@@ -146,7 +125,7 @@ export const httpError = (code, meta = {}) => {
     status,
     message,
     type,
-    ...attributes ? { attributes } : {},
+    ...rest,
   }
 
   // Omits all frames above "httpError" from the generated stack trace
@@ -159,7 +138,6 @@ export default {
   assert,
   ccd,
   req,
-  supported,
   isDir,
   config,
   merge,
